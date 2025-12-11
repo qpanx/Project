@@ -56,6 +56,7 @@
                         <a href="#home" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
                         <a href="#about" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
                         <a href="#specs" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">Components</a>
+                        <a href="#gallery" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">Gallery</a>
                         <a href="#code" class="bg-brand-yellow text-brand-dark hover:bg-yellow-400 px-4 py-2 rounded-md text-sm font-bold transition-colors">View Code</a>
                     </div>
                 </div>
@@ -252,6 +253,81 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-brand-dark relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white">Project <span class="text-brand-yellow">Gallery</span></h2>
+                <p class="text-slate-400 mt-4">Visuals of the chassis, wiring, and testing.</p>
+                <div class="w-20 h-1 bg-brand-yellow mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('assets/car-photo.jpg')">
+                    <img src="assets/car-photo.jpg" alt="Car Top View" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('assets/car-photo-2.jpeg')">
+                    <img src="assets/car-photo-2.jpeg" alt="Side Profile" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('assets/car3.jpg')">
+                    <img src="assets/car3.jpg" alt="Wiring" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+
+                 <!-- Gallery Item 4 -->
+                 <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('assets/Video1.mp4', 'video')">
+                    <img src="assets/photo5.jpeg" alt="Sensors" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-circle-play text-white text-5xl"></i>
+                    </div>
+                </div>
+
+                 <!-- Gallery Item 5 -->
+                 <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('assets/Video2.mp4', 'video')">
+                    <img src="assets/photo4.jpeg" alt="Track" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-circle-play text-white text-5xl"></i>
+                    </div>
+                </div>
+
+                 <!-- Gallery Item 6 -->
+                 <!-- <div class="group relative overflow-hidden rounded-xl cursor-pointer border border-slate-700" onclick="openModal('https://placehold.co/800x600/1e293b/fbbf24?text=Final+Build')">
+                    <img src="https://placehold.co/600x400/1e293b/fbbf24?text=Final+Build" alt="Final" class="w-full h-64 object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass-plus text-white text-3xl"></i>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Image/Video Modal -->
+    <div id="mediaModal" class="fixed inset-0 z-[60] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm" onclick="closeModal()">
+        <button class="absolute top-6 right-6 text-white hover:text-brand-yellow transition-colors">
+            <i class="fa-solid fa-xmark text-4xl"></i>
+        </button>
+        <div class="relative" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="Full View" class="hidden max-w-full max-h-[90vh] rounded-lg shadow-2xl border-2 border-slate-700">
+            <video id="modalVideo" controls class="hidden max-w-full max-h-[90vh] rounded-lg shadow-2xl border-2 border-slate-700">
+                <source id="videoSource" src="" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
     <!-- Code Section -->
     <section id="code" class="py-20 bg-slate-900">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -274,51 +350,95 @@
                 </div>
                 <div class="p-4 overflow-x-auto">
                     <pre class="text-sm code-preview text-gray-300" id="codeBlock">
-<span class="text-green-400">// Sensor Pins</span>
-<span class="text-purple-400">#define</span> S1 2
-<span class="text-purple-400">#define</span> S2 3
-<span class="text-purple-400">#define</span> S3 4 <span class="text-gray-500">// Middle Sensor</span>
-<span class="text-purple-400">#define</span> S4 5
-<span class="text-purple-400">#define</span> S5 6
+<span class="text-purple-400">#include</span> <span class="text-orange-400">&lt;lil.abdallah1-project-1_inferencing.h&gt;</span>
+
+<span class="text-green-400">// Sensor & Motor Pins</span>
+<span class="text-purple-400">const int</span> irPins[5] = {32, 33, 25, 26, 27};
+<span class="text-purple-400">int</span> sensorValues[5];
+
+<span class="text-purple-400">#define</span> IN1 14 | IN2 12 | IN3 13 | IN4 15
+<span class="text-purple-400">#define</span> ENA 23 | ENB 22
+<span class="text-purple-400">#define</span> LED_R 4 | LED_G 2 | LED_B 17
+
+<span class="text-purple-400">int</span> motorSpeed = 110;
 
 <span class="text-purple-400">void</span> <span class="text-yellow-300">setup</span>() {
-  <span class="text-blue-400">pinMode</span>(S1, INPUT);
-  <span class="text-blue-400">pinMode</span>(S2, INPUT);
-  <span class="text-blue-400">pinMode</span>(S3, INPUT);
-  <span class="text-blue-400">pinMode</span>(S4, INPUT);
-  <span class="text-blue-400">pinMode</span>(S5, INPUT);
+  Serial.<span class="text-blue-400">begin</span>(115200);
   
-  <span class="text-gray-500">// Initialize Motors...</span>
+  <span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; i++) {
+    <span class="text-blue-400">pinMode</span>(irPins[i], INPUT);
+  }
+  
+  <span class="text-blue-400">pinMode</span>(IN1, OUTPUT); <span class="text-blue-400">pinMode</span>(IN2, OUTPUT);
+  <span class="text-blue-400">pinMode</span>(IN3, OUTPUT); <span class="text-blue-400">pinMode</span>(IN4, OUTPUT);
+  <span class="text-blue-400">pinMode</span>(ENA, OUTPUT); <span class="text-blue-400">pinMode</span>(ENB, OUTPUT);
+  <span class="text-blue-400">pinMode</span>(LED_R, OUTPUT); <span class="text-blue-400">pinMode</span>(LED_G, OUTPUT);
+  <span class="text-blue-400">pinMode</span>(LED_B, OUTPUT);
+  
+  stopMotors();
+  setColor(false, false, false);
 }
 
 <span class="text-purple-400">void</span> <span class="text-yellow-300">loop</span>() {
-  <span class="text-gray-500">// Read Sensors</span>
-  <span class="text-blue-400">int</span> s1_val = <span class="text-blue-400">digitalRead</span>(S1);
-  <span class="text-blue-400">int</span> s2_val = <span class="text-blue-400">digitalRead</span>(S2);
-  <span class="text-blue-400">int</span> s3_val = <span class="text-blue-400">digitalRead</span>(S3);
-  <span class="text-blue-400">int</span> s4_val = <span class="text-blue-400">digitalRead</span>(S4);
-  <span class="text-blue-400">int</span> s5_val = <span class="text-blue-400">digitalRead</span>(S5);
+  <span class="text-gray-500">// Read 5 IR sensors</span>
+  <span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; i++) {
+    sensorValues[i] = !<span class="text-blue-400">digitalRead</span>(irPins[i]);
+  }
 
-  <span class="text-gray-500">// Logic: 0 = White, 1 = Black Line</span>
+  <span class="text-gray-500">// Prepare features for AI model</span>
+  <span class="text-purple-400">float</span> features[5];
+  <span class="text-purple-400">for</span> (<span class="text-purple-400">int</span> i = 0; i &lt; 5; i++) {
+    features[i] = (<span class="text-purple-400">float</span>)sensorValues[i];
+  }
+
+  signal_t signal;
+  numpy::signal_from_buffer(features, 5, &amp;signal);
+
+  ei_impulse_result_t result = {0};
+  EI_IMPULSE_ERROR res = <span class="text-blue-400">run_classifier</span>(&amp;signal, &amp;result, false);
+
+  <span class="text-gray-500">// Motor decision based on AI predictions</span>
+  <span class="text-purple-400">float</span> forwardProb = result.classification[1].value;
+  <span class="text-purple-400">float</span> leftProb    = result.classification[2].value;
+  <span class="text-purple-400">float</span> rightProb   = result.classification[3].value;
+  <span class="text-purple-400">float</span> stopProb    = result.classification[0].value;
+
+  <span class="text-purple-400">if</span> (stopProb &gt; 0.6) {
+    <span class="text-yellow-300">stopMotors</span>();
+    <span class="text-yellow-300">setColor</span>(true, true, true);
+  } <span class="text-purple-400">else if</span> (forwardProb &gt; 0.6) {
+    <span class="text-yellow-300">moveForward</span>();
+    <span class="text-yellow-300">setColor</span>(false, true, false); <span class="text-gray-500">// Green</span>
+  } <span class="text-purple-400">else if</span> (leftProb &gt; 0.6) {
+    <span class="text-yellow-300">turnLeft</span>();
+    <span class="text-yellow-300">setColor</span>(true, false, false); <span class="text-gray-500">// Red</span>
+  } <span class="text-purple-400">else if</span> (rightProb &gt; 0.6) {
+    <span class="text-yellow-300">turnRight</span>();
+    <span class="text-yellow-300">setColor</span>(false, false, true); <span class="text-gray-500">// Blue</span>
+  }
   
-  <span class="text-purple-400">if</span> (s3_val == 1) {
-    <span class="text-yellow-300">moveForward</span>(); <span class="text-gray-500">// Center sensor sees line</span>
-  } 
-  <span class="text-purple-400">else if</span> (s2_val == 1) {
-    <span class="text-yellow-300">turnLeftSafe</span>(); <span class="text-gray-500">// Slightly left</span>
-  }
-  <span class="text-purple-400">else if</span> (s4_val == 1) {
-    <span class="text-yellow-300">turnRightSafe</span>(); <span class="text-gray-500">// Slightly right</span>
-  }
-  <span class="text-purple-400">else if</span> (s1_val == 1) {
-    <span class="text-yellow-300">turnLeftHard</span>(); <span class="text-gray-500">// Sharp left</span>
-  }
-  <span class="text-purple-400">else if</span> (s5_val == 1) {
-    <span class="text-yellow-300">turnRightHard</span>(); <span class="text-gray-500">// Sharp right</span>
-  }
-  <span class="text-purple-400">else</span> {
-    <span class="text-yellow-300">stopCar</span>();
-  }
+  <span class="text-blue-400">delay</span>(150);
+}
+
+<span class="text-green-400">// Motor Control Functions</span>
+<span class="text-purple-400">void</span> <span class="text-yellow-300">moveForward</span>() {
+  <span class="text-blue-400">digitalWrite</span>(IN1, LOW); <span class="text-blue-400">digitalWrite</span>(IN2, HIGH);
+  <span class="text-blue-400">digitalWrite</span>(IN3, LOW); <span class="text-blue-400">digitalWrite</span>(IN4, HIGH);
+  <span class="text-blue-400">analogWrite</span>(ENA, motorSpeed);
+  <span class="text-blue-400">analogWrite</span>(ENB, motorSpeed);
+}
+
+<span class="text-purple-400">void</span> <span class="text-yellow-300">turnLeft</span>() {
+  <span class="text-blue-400">digitalWrite</span>(IN1, HIGH); <span class="text-blue-400">digitalWrite</span>(IN2, LOW);
+  <span class="text-blue-400">digitalWrite</span>(IN3, LOW); <span class="text-blue-400">digitalWrite</span>(IN4, HIGH);
+  <span class="text-blue-400">analogWrite</span>(ENA, motorSpeed / 2);
+  <span class="text-blue-400">analogWrite</span>(ENB, motorSpeed);
+}
+
+<span class="text-purple-400">void</span> <span class="text-yellow-300">setColor</span>(<span class="text-purple-400">bool</span> r, <span class="text-purple-400">bool</span> g, <span class="text-purple-400">bool</span> b) {
+  <span class="text-blue-400">digitalWrite</span>(LED_R, r ? LOW : HIGH);
+  <span class="text-blue-400">digitalWrite</span>(LED_G, g ? LOW : HIGH);
+  <span class="text-blue-400">digitalWrite</span>(LED_B, b ? LOW : HIGH);
 }</pre>
                 </div>
             </div>
@@ -344,36 +464,169 @@
 
     <script>
         function copyCode() {
-            const codeText = `// Simple Arduino Line Follower Logic
-#define S1 2
-#define S2 3
-#define S3 4
-#define S4 5
-#define S5 6
+            const codeText = `#include <lil.abdallah1-project-1_inferencing.h>
+
+// Sensor & Motor Pins
+const int irPins[5] = {32, 33, 25, 26, 27};
+int sensorValues[5];
+
+#define IN1 14
+#define IN2 12
+#define IN3 13
+#define IN4 15
+#define ENA 23
+#define ENB 22
+
+// RGB LED Pins (Common Anode)
+#define LED_R 4
+#define LED_G 2
+#define LED_B 17
+
+int motorSpeed = 110;
 
 void setup() {
-  pinMode(S1, INPUT);
-  pinMode(S2, INPUT);
-  pinMode(S3, INPUT);
-  pinMode(S4, INPUT);
-  pinMode(S5, INPUT);
-  // Setup motors output pins here...
+  Serial.begin(115200);
+
+  for (int i = 0; i < 5; i++) {
+    pinMode(irPins[i], INPUT);
+  }
+
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+
+  pinMode(LED_R, OUTPUT);
+  pinMode(LED_G, OUTPUT);
+  pinMode(LED_B, OUTPUT);
+
+  stopMotors();
+  setColor(false, false, false);
+  Serial.println("🚀 AI Line Follower Ready!");
 }
 
 void loop() {
-  if (digitalRead(S3) == 1) {
-    // Forward
-  } else if (digitalRead(S2) == 1) {
-    // Left
-  } else if (digitalRead(S4) == 1) {
-    // Right
+  // Read 5 IR sensors
+  for (int i = 0; i < 5; i++) {
+    sensorValues[i] = !digitalRead(irPins[i]);
   }
+
+  // Prepare features for AI model
+  float features[5];
+  for (int i = 0; i < 5; i++) {
+    features[i] = (float)sensorValues[i];
+  }
+
+  signal_t signal;
+  numpy::signal_from_buffer(features, 5, &signal);
+
+  ei_impulse_result_t result = {0};
+  EI_IMPULSE_ERROR res = run_classifier(&signal, &result, false);
+
+  // Motor decision based on AI predictions
+  float forwardProb = result.classification[1].value;
+  float leftProb    = result.classification[2].value;
+  float rightProb   = result.classification[3].value;
+  float stopProb    = result.classification[0].value;
+
+  if (stopProb > 0.6) {
+    stopMotors();
+    setColor(true, true, true);
+  } else if (forwardProb > 0.6) {
+    moveForward();
+    setColor(false, true, false);
+  } else if (leftProb > 0.6) {
+    turnLeft();
+    setColor(true, false, false);
+  } else if (rightProb > 0.6) {
+    turnRight();
+    setColor(false, false, true);
+  }
+
+  delay(150);
+}
+
+void moveForward() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENA, motorSpeed);
+  analogWrite(ENB, motorSpeed);
+}
+
+void turnLeft() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  analogWrite(ENA, motorSpeed / 2);
+  analogWrite(ENB, motorSpeed);
+}
+
+void turnRight() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENA, motorSpeed);
+  analogWrite(ENB, motorSpeed / 2);
+}
+
+void stopMotors() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  analogWrite(ENA, 0);
+  analogWrite(ENB, 0);
+}
+
+void setColor(bool r, bool g, bool b) {
+  digitalWrite(LED_R, r ? LOW : HIGH);
+  digitalWrite(LED_G, g ? LOW : HIGH);
+  digitalWrite(LED_B, b ? LOW : HIGH);
 }`;
             navigator.clipboard.writeText(codeText).then(() => {
                 alert("Code copied to clipboard!");
             }).catch(err => {
                 console.error('Failed to copy: ', err);
             });
+        }
+
+        function openModal(src, type = 'image') {
+            const modal = document.getElementById('mediaModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            const videoSource = document.getElementById('videoSource');
+
+            modal.classList.remove('hidden');
+
+            if (type === 'video') {
+                modalImg.classList.add('hidden');
+                modalVideo.classList.remove('hidden');
+                videoSource.src = src;
+                modalVideo.load();
+                modalVideo.play();
+            } else {
+                modalVideo.classList.add('hidden');
+                modalVideo.pause();
+                modalImg.classList.remove('hidden');
+                modalImg.src = src;
+            }
+            
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideo = document.getElementById('modalVideo');
+            
+            modal.classList.add('hidden');
+            modalVideo.pause();
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
     </script>
 </body>
