@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Line Follower Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#FCD34D', // Matches the car wheels
+                            dark: '#0F172A',
+                            accent: '#3B82F6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #fbbf24;
+        }
+        .code-preview {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-300 font-sans">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-microchip text-brand-yellow text-2xl mr-2"></i>
+                    <span class="font-bold text-xl text-white tracking-wider">ROBO<span class="text-brand-yellow">CAR</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#about" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#specs" class="hover:text-brand-yellow px-3 py-2 rounded-md text-sm font-medium transition-colors">Components</a>
+                        <a href="#code" class="bg-brand-yellow text-brand-dark hover:bg-yellow-400 px-4 py-2 rounded-md text-sm font-bold transition-colors">View Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 relative overflow-hidden">
+        <!-- Background Decor -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            <div class="absolute -top-10 -right-10 w-96 h-96 bg-brand-yellow/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-40 -left-20 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <div class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-brand-yellow uppercase bg-yellow-900/30 rounded-full">
+                    ESP32 devkit
+                </div>
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                    Autonomous <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-yellow-600">Line Follower</span>
+                </h1>
+                <p class="text-lg text-slate-400 mb-8 max-w-lg">
+                    A high-precision robotics project utilizing a 5-sensor array and PID-like logic to navigate complex tracks autonomously. Powered by ESP32 devkit.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#specs" class="bg-white text-brand-dark px-6 py-3 rounded-lg font-bold hover:bg-slate-200 transition-all flex items-center">
+                        <i class="fa-solid fa-screwdriver-wrench mr-2"></i> Specs
+                    </a>
+                    <a href="#gallery" class="border border-slate-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-slate-800 transition-all">
+                        View Gallery
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Graphic Representation of the Car -->
+            <div class="md:w-1/2 flex justify-center relative">
+                <div class="relative w-80 h-64 md:w-96 md:h-80 bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl flex items-center justify-center p-4">
+                    <video src="assets/WhatsApp Video 2025-12-11 at 3.51.37 PM.mp4" autoplay loop muted playsinline class="w-full h-auto object-contain rounded-lg">
+                        Your browser does not support the video tag.
+                    </video>
+                    <!-- <div class="text-center">
+                        <i class="fa-solid fa-robot text-6xl text-slate-600 mb-4"></i>
+                        <p class="text-slate-400 text-sm">Upload your car photo here</p>
+                        <div class="mt-4 flex justify-center gap-2">
+                            Visualizing the sensors seen in image -->
+                            <!-- <div class="w-4 h-4 rounded-full bg-blue-500 animate-pulse"></div>
+                            <div class="w-4 h-4 rounded-full bg-blue-500 animate-pulse delay-75"></div>
+                            <div class="w-4 h-4 rounded-full bg-brand-yellow shadow-[0_0_10px_#FCD34D] animate-ping"></div>
+                            <div class="w-4 h-4 rounded-full bg-blue-500 animate-pulse delay-75"></div>
+                            <div class="w-4 h-4 rounded-full bg-blue-500 animate-pulse"></div>
+                        </div>
+                        <p class="text-xs text-brand-yellow mt-2">5-Channel Sensor Array Active</p>
+                    </div>  -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Overview -->
+    <section id="about" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white">How It Works</h2>
+                <div class="w-20 h-1 bg-brand-yellow mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-brand-yellow transition-all group">
+                    <div class="w-14 h-14 bg-slate-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fa-solid fa-eye text-2xl text-brand-yellow group-hover:text-brand-dark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Detection</h3>
+                    <p class="text-slate-400">
+                        Five IR sensors mounted at the front constantly scan the surface contrast to differentiate between the black line and the white floor.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-brand-yellow transition-all group">
+                    <div class="w-14 h-14 bg-slate-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fa-solid fa-brain text-2xl text-brand-yellow group-hover:text-brand-dark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Processing</h3>
+                    <p class="text-slate-400">
+                        The Arduino reads the digital inputs from the sensors. Based on which sensor is triggered, it calculates the error correction needed.
+                    </p>
+                </div>
+
+                <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 hover:border-brand-yellow transition-all group">
+                    <div class="w-14 h-14 bg-slate-700 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-yellow transition-colors">
+                        <i class="fa-solid fa-gears text-2xl text-brand-yellow group-hover:text-brand-dark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Actuation</h3>
+                    <p class="text-slate-400">
+                        The L298N motor driver receives PWM signals to adjust the speed of the left and right yellow gear motors to steer the chassis.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components List (Based on images) -->
+    <section id="specs" class="py-20 bg-brand-dark">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold text-white mb-6">Hardware <span class="text-brand-yellow">Components</span></h2>
+                    <p class="text-slate-400 mb-8">
+                        The build features a customized double-decker acrylic chassis. The wiring is managed via a breadboard on the top deck, connecting the 5-sensor array to the main controller.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center p-4 bg-slate-800 rounded-lg border-l-4 border-brand-yellow">
+                            <i class="fa-solid fa-microchip text-slate-400 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-white">microcontroller & inference</h4>
+                                <p class="text-xs text-slate-500">ESP32 devkit</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-slate-800 rounded-lg border-l-4 border-blue-500">
+                            <i class="fa-solid fa-wifi text-slate-400 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Input Sensors</h4>
+                                <p class="text-xs text-slate-500">5 channel ir sensor</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-slate-800 rounded-lg border-l-4 border-red-500">
+                            <i class="fa-solid fa-car-battery text-slate-400 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-white">Power Supply</h4>
+                                <p class="text-xs text-slate-500">3x18650 li-ion batteries</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center p-4 bg-slate-800 rounded-lg border-l-4 border-green-500">
+                            <i class="fa-solid fa-battery-full text-slate-400 mr-4"></i>
+                            <div>
+                                <h4 class="font-bold text-white">DC Gear Motors (TT)</h4>
+                                <p class="text-xs text-slate-500">With 65mm Yellow Wheels</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Schematic/Stats Visual -->
+                <div class="md:w-1/2 bg-slate-800 rounded-2xl p-8 border border-slate-700">
+                    <h3 class="text-xl font-bold text-white mb-6">Technical Specifications</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Sensor Sensitivity</span>
+                                <span class="text-brand-yellow">Adjustable</span>
+                            </div>
+                            <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-brand-yellow h-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Motor Torque</span>
+                                <span class="text-brand-yellow">0.8 kg.cm</span>
+                            </div>
+                            <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-blue-500 h-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Battery Life</span>
+                                <span class="text-brand-yellow">~45 mins</span>
+                            </div>
+                            <div class="w-full bg-slate-700 h-2 rounded-full overflow-hidden">
+                                <div class="bg-green-500 h-full" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-8 border-t border-slate-700">
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-slate-900 p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-white">5</div>
+                                <div class="text-xs text-slate-500 uppercase">Sensors</div>
+                            </div>
+                            <div class="bg-slate-900 p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-white">5V-9V</div>
+                                <div class="text-xs text-slate-500 uppercase">Input Voltage</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Section -->
+    <section id="code" class="py-20 bg-slate-900">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-white">Arduino Logic</h2>
+                <p class="text-slate-400 mt-2">The core algorithm handling the line detection.</p>
+            </div>
+
+            <div class="bg-[#1e1e1e] rounded-xl overflow-hidden shadow-2xl border border-slate-700">
+                <div class="flex items-center justify-between px-4 py-3 bg-[#252526] border-b border-black">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <span class="text-xs text-slate-400 font-mono">main.ino</span>
+                    <button onclick="copyCode()" class="text-slate-400 hover:text-white transition-colors text-xs">
+                        <i class="fa-regular fa-copy mr-1"></i> Copy
+                    </button>
+                </div>
+                <div class="p-4 overflow-x-auto">
+                    <pre class="text-sm code-preview text-gray-300" id="codeBlock">
+<span class="text-green-400">// Sensor Pins</span>
+<span class="text-purple-400">#define</span> S1 2
+<span class="text-purple-400">#define</span> S2 3
+<span class="text-purple-400">#define</span> S3 4 <span class="text-gray-500">// Middle Sensor</span>
+<span class="text-purple-400">#define</span> S4 5
+<span class="text-purple-400">#define</span> S5 6
+
+<span class="text-purple-400">void</span> <span class="text-yellow-300">setup</span>() {
+  <span class="text-blue-400">pinMode</span>(S1, INPUT);
+  <span class="text-blue-400">pinMode</span>(S2, INPUT);
+  <span class="text-blue-400">pinMode</span>(S3, INPUT);
+  <span class="text-blue-400">pinMode</span>(S4, INPUT);
+  <span class="text-blue-400">pinMode</span>(S5, INPUT);
+  
+  <span class="text-gray-500">// Initialize Motors...</span>
+}
+
+<span class="text-purple-400">void</span> <span class="text-yellow-300">loop</span>() {
+  <span class="text-gray-500">// Read Sensors</span>
+  <span class="text-blue-400">int</span> s1_val = <span class="text-blue-400">digitalRead</span>(S1);
+  <span class="text-blue-400">int</span> s2_val = <span class="text-blue-400">digitalRead</span>(S2);
+  <span class="text-blue-400">int</span> s3_val = <span class="text-blue-400">digitalRead</span>(S3);
+  <span class="text-blue-400">int</span> s4_val = <span class="text-blue-400">digitalRead</span>(S4);
+  <span class="text-blue-400">int</span> s5_val = <span class="text-blue-400">digitalRead</span>(S5);
+
+  <span class="text-gray-500">// Logic: 0 = White, 1 = Black Line</span>
+  
+  <span class="text-purple-400">if</span> (s3_val == 1) {
+    <span class="text-yellow-300">moveForward</span>(); <span class="text-gray-500">// Center sensor sees line</span>
+  } 
+  <span class="text-purple-400">else if</span> (s2_val == 1) {
+    <span class="text-yellow-300">turnLeftSafe</span>(); <span class="text-gray-500">// Slightly left</span>
+  }
+  <span class="text-purple-400">else if</span> (s4_val == 1) {
+    <span class="text-yellow-300">turnRightSafe</span>(); <span class="text-gray-500">// Slightly right</span>
+  }
+  <span class="text-purple-400">else if</span> (s1_val == 1) {
+    <span class="text-yellow-300">turnLeftHard</span>(); <span class="text-gray-500">// Sharp left</span>
+  }
+  <span class="text-purple-400">else if</span> (s5_val == 1) {
+    <span class="text-yellow-300">turnRightHard</span>(); <span class="text-gray-500">// Sharp right</span>
+  }
+  <span class="text-purple-400">else</span> {
+    <span class="text-yellow-300">stopCar</span>();
+  }
+}</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-white font-bold text-xl mb-4 md:mb-0">
+                <i class="fa-solid fa-microchip text-brand-yellow mr-2"></i> ROBO<span class="text-brand-yellow">CAR</span>
+            </div>
+            <div class="text-slate-500 text-sm">
+                &copy; 2025 Arduino Project. Created for Educational Purposes.
+            </div>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-github text-xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const codeText = `// Simple Arduino Line Follower Logic
+#define S1 2
+#define S2 3
+#define S3 4
+#define S4 5
+#define S5 6
+
+void setup() {
+  pinMode(S1, INPUT);
+  pinMode(S2, INPUT);
+  pinMode(S3, INPUT);
+  pinMode(S4, INPUT);
+  pinMode(S5, INPUT);
+  // Setup motors output pins here...
+}
+
+void loop() {
+  if (digitalRead(S3) == 1) {
+    // Forward
+  } else if (digitalRead(S2) == 1) {
+    // Left
+  } else if (digitalRead(S4) == 1) {
+    // Right
+  }
+}`;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert("Code copied to clipboard!");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
